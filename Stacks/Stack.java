@@ -1,8 +1,12 @@
-public Class Stack{
+//A basic Stack Implemetation
+//No Out of Bound cases handeled.
+
+public class Stack{
 
 	private int pointer;
+	private int[] stackArray;
 	public Stack(int arraySize){
-		int[] stackArray = new int[arraySize];
+		stackArray = new int[arraySize];
 		pointer = -1;
 	}
 	public Stack(){
