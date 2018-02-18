@@ -73,6 +73,10 @@ public class Graph_Input{
 	}
 
 	public static void main(String[] args){
+		System.out.println("#Vertices:"+args[0]+"\n"+"#Edges:"+args[1]+"\n"+"Are there negative edges:"+args[2]);
+		Random rand3 = new Random();
+		int negDecision=0, someRand3=0, factor=0;
+		negDecision = Integer.parseInt(args[2]);		
 		edgeVertex = new int[2];
 		Vertices = Integer.parseInt(args[0]);
 		EdgesCount = Integer.parseInt(args[1]);
@@ -83,11 +87,21 @@ public class Graph_Input{
 			output.println(Vertices);
 			
 			//printing edges and weights
-			for(int i=0;i<EdgesCount;i++){						
+			for(int i=0;i<EdgesCount;i++){
+				someRand3 = rand3.nextInt(10);
+				// System.out.println(someRand3+"\n");						
 				weight = computeWeight();
+				factor = 1;
+				if(negDecision == 1){
+					if(someRand3 > 8 ){
+						factor = -1;
+						// weight = someRand3*-1;
+					}
+				}
 				edgeVertex = computeEdges();
 				edgeWtString = edgeVertex[0]+" "+edgeVertex[1]+" "+weight;
-				output.println(edgeWtString);				
+				output.println(edgeWtString);	
+				System.out.println(edgeWtString);			
 			}	
 			output.close();
 		}
