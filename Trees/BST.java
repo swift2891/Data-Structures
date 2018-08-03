@@ -98,6 +98,84 @@ public class BST{
 			System.out.println(c.data);
 		}
 	}
+	
+	public Node[] findNode(int val){
+		Node[] res = new Node[2];
+		Node prevNode=this.root,c = this.root;
+		while(true){
+			if(val<c.data){
+				if(c.left!=null){
+					prevNode = c;
+					c = c.left;
+				}
+				else{
+					return null;
+				}
+			}
+			else if(val>c.data){
+				if(c.right!=null){
+					System.out.println("Right side>>");
+					prevNode = c;
+					c = c.right;
+				}
+				else{
+					return null;
+				}
+			}
+			else{
+				System.out.println("Found Ya");
+				res[0] = c;
+				res[1] = prevNode;
+				return res;
+			}
+		}	
+	}
+		
+	public Node findSuccessor(Node n){
+		Node c = n;
+		while(true){
+			if(c.right!=null){
+				c = c.right;
+				while(c.left!=null){
+					c = c.left;
+				}
+				return c;
+			}
+			else{
+				return c;
+			}
+		}	
+	}
+	
+	public void delete(int val){
+		Node[] t = findNode(val);
+		System.out.println("Node details:"+t[0].data+" parent:"+t[1].data);
+		if(t[0].left!=null && t[0].right!=null){
+			Node s = findSuccessor(t[0]);
+			int temp = s.data;
+			delete(s.data);
+			t[0].data = temp;
+		}
+		else if(t[0].left!=null){
+			if(t[1].left == t[0])
+				t[1].left = t[0].left;
+			else
+				t[1].right = t[0].left;
+		}
+		else if(t[0].right!=null){
+			if(t[1].left == t[0])
+				t[1].left = t[0].right;
+			else
+				t[1].right = t[0].right;
+		}
+		else{
+			System.out.println("Leaf delete:"+t[0].data);
+			if(t[1].left == t[0])	
+				t[1].left = null;
+			else
+				t[1].right = null;
+		}
+	}
 
 	public static void main(String args[]){
 		BST bst = new BST(5);
@@ -111,7 +189,14 @@ public class BST{
 		bst.add(4);
 //		inOrderTraverse(bst.root);
 //		preOrderTraverse(bst.root);
-		postOrderTraverse(bst.root);
+//		postOrderTraverse(bst.root);
+		inOrderTraverse(bst.root);
+		bst.delete(5);
+		System.out.println("After deleting");
+		inOrderTraverse(bst.root);
+//		Node a[] = bst.findNode(8);
+//		System.out.println(a[0].data+" "+a[1].data);
+		//System.out.println(bst.findSuccessor(bst.root.left.right).data);
 	}
 }
 
