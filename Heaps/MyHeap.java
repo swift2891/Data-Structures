@@ -1,4 +1,4 @@
-//Min_Heap example
+//Min_Heap example1
 public class MyHeap{
 	int[] heap;
 	int index,ptr;
